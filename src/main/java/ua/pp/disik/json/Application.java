@@ -15,7 +15,7 @@ import java.util.*;
 
 @Slf4j
 public class Application {
-    private static Converter converter = new JacksonConverter();
+    private static Converter converter;
 
     public static void showBigDecimal() {
         BigDecimal number = converter.convertToObject(
@@ -81,6 +81,8 @@ public class Application {
 
     @SneakyThrows
     public static void main(String[] args) {
+        converter = new GsonConverter();
+
         log.debug("{}", converter.convertToObject("entity/with-nested.json", WithNested.class));
     }
 }
