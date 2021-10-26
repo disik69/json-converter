@@ -81,5 +81,6 @@ public class Application {
 
     @SneakyThrows
     public static void main(String[] args) {
+        log.debug("{}", converter.convertToObject("entity/with-nested.json", WithNested.class));
     }
 }

@@ -1,0 +1,7 @@
+{
+    "common": 8,
+    "nested": {
+        "a": 8,
+        "b": null
+    }
+}
