@@ -18,7 +18,7 @@ public class JacksonConverter implements Converter {
     public static ObjectMapper createObjectMapper() {
         return new ObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-//                .configure(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES, true)
+                .configure(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES, true)
                 .configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false)
                 .setInjectableValues(new InjectableValues.Std().addValue(WithNested.Nested.class, new WithNested.Nested()));
     }

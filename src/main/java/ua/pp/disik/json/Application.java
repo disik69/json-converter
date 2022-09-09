@@ -86,6 +86,10 @@ public class Application {
         log.debug("{}", converter.convertToObject("entity/key-value.json", KeyValue.class));
     }
 
+    public static void showWithNested() {
+        log.debug("{}", converter.convertToObject("entity/with-nested.json", WithNested.class));
+    }
+
     @SneakyThrows
     public static void main(String[] args) {
 

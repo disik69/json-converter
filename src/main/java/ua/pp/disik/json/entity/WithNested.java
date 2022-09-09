@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class WithNested {
-//    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public static WithNested getInstance(@JsonProperty("common") int common,
                                          @JacksonInject Nested nested) {
         WithNested instance = new WithNested();
