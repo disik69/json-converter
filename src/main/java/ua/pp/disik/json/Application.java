@@ -1,5 +1,8 @@
 package ua.pp.disik.json;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.InjectableValues;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
@@ -15,7 +18,7 @@ import java.util.*;
 
 @Slf4j
 public class Application {
-    private static Converter converter;
+    private static Converter converter = new JacksonConverter();
 
     public static void showBigDecimal() {
         BigDecimal number = converter.convertToObject(
@@ -79,10 +82,12 @@ public class Application {
         log.debug("{}", converter.convertToObject("entity/maps.json", Maps.class));
     }
 
+    public static void showKeyOverlaying() {
+        log.debug("{}", converter.convertToObject("entity/key-value.json", KeyValue.class));
+    }
+
     @SneakyThrows
     public static void main(String[] args) {
-        converter = new GsonConverter();
 
-        log.debug("{}", converter.convertToObject("entity/with-nested.json", WithNested.class));
     }
 }
