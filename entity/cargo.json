@@ -1,0 +1,40 @@
+{
+    "cargo": {
+        "id": 289038644214,
+        "dateFrom": "2022-08-21T00:00:00.000+00:00",
+        "dateTo": "2022-08-25T00:00:00.000+00:00",
+        "bodyType": "",
+        "cargoName": "",
+        "cargoId": 0,
+        "gruzMass1": 0.0,
+        "gruzMass2": 0.0,
+        "gruzVolume1": 0.0,
+        "gruzVolume2": 0.0,
+        "waypointListSource": [
+            {
+                "countrySign": "string",
+                "region": "",
+                "townId": 0,
+                "townName": "string",
+                "postCode": "string"
+            }
+        ],
+        "waypointListTarget": [
+            {
+                "countrySign": "string",
+                "region": "",
+                "townId": 0,
+                "townName": "string",
+                "postCode": "string"
+            }
+        ],
+        "paymentStavka": "string",
+        "paymentCurrency": "",
+        "paymentUnit": "",
+        "paymentForm": "",
+        "paymentVat": true,
+        "paymentPrepay": 0,
+        "paymentMoment": "",
+        "paymentDelay": 0
+    }
+}
