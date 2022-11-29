@@ -1,16 +1,11 @@
 package ua.pp.disik.json;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.InjectableValues;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import ua.pp.disik.json.converter.Converter;
-import ua.pp.disik.json.converter.GsonConverter;
-import ua.pp.disik.json.converter.JacksonConverter;
 import ua.pp.disik.json.entity.*;
 
 import java.math.BigDecimal;
@@ -18,9 +13,16 @@ import java.util.*;
 
 @Slf4j
 public class Application {
-    private static Converter converter = new JacksonConverter();
+    private Converter converter;
 
-    public static void showBigDecimal() {
+    @SneakyThrows
+    public Application() {
+        this.converter = (Converter) Class.forName(
+                System.getProperty("converter", "ua.pp.disik.json.converter.JacksonConverter")
+        ).getConstructor().newInstance();
+    }
+
+    public void showBigDecimal() {
         BigDecimal number = converter.convertToObject(
                 "entity/big-decimal-example.json",
                 BigDecimalExample.class
@@ -32,14 +34,14 @@ public class Application {
         log.debug("scale {}", scale);
     }
 
-    public static void showJson() {
+    public void showJson() {
         DoubleExample example = new DoubleExample();
         example.setNumber(10D / 3);
         String json = converter.convertToJson(example);
         log.debug("DoubleExample {}", json);
     }
 
-    public static void showDouble() {
+    public void showDouble() {
         Double number = converter.convertToObject(
                 "entity/double-example.json",
                 DoubleExample.class
@@ -47,7 +49,7 @@ public class Application {
         log.debug("Double {}", number / 2);
     }
 
-    public static void showTransitiveJson() {
+    public void showTransitiveJson() {
         BigDecimalExample example = converter.convertToObject(
                 "entity/big-decimal-example.json",
                 BigDecimalExample.class
@@ -56,7 +58,7 @@ public class Application {
         log.debug("BigDecimalExample {}", converter.convertToJson(example));
     }
 
-    public static void showMap() {
+    public void showMap() {
         MapExample mapExample = new MapExample();
         Map<String, String> map = new LinkedTreeMap<>();
         map.put("a", null);
@@ -64,13 +66,13 @@ public class Application {
         log.debug("MapExample {}", converter.convertToJson(mapExample));
     }
 
-    public static void showException() {
+    public void showException() {
         ChildException exception = new ChildException();
         exception.setDescription("not auth, not auth");
         log.debug("{}", converter.convertToJson(exception));
     }
 
-    public static void showObjectToTreeAndGetting() {
+    public void showObjectToTreeAndGetting() {
         Gson gson = new GsonBuilder().create();
         Collection<ListItem> collection = new ArrayList<>();
         collection.add(new ListItem("a"));
@@ -78,16 +80,20 @@ public class Application {
         log.debug("{}", gson.toJsonTree(collection).getAsJsonArray().get(0).getAsJsonObject().get("field").getAsString());
     }
 
-    public static void showFieldToMapKey() {
+    public void showFieldToMapKey() {
         log.debug("{}", converter.convertToObject("entity/maps.json", Maps.class));
     }
 
-    public static void showKeyOverlaying() {
+    public void showKeyOverlaying() {
         log.debug("{}", converter.convertToObject("entity/key-value.json", KeyValue.class));
     }
 
-    public static void showWithNested() {
+    public void showWithNested() {
         log.debug("{}", converter.convertToObject("entity/with-nested.json", WithNested.class));
+    }
+
+    public void showDefaultPrimitive() {
+        log.debug("{}", converter.convertToObject("entity/primitive.json", Primitive.class));
     }
 
     @SneakyThrows
