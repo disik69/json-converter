@@ -2,6 +2,9 @@
     "common": 8,
     "nested": {
         "a": 8,
-        "b": null
+        "b": null,
+        "type": null,
+        "c": 8,
+        "d": 8
     }
 }

@@ -98,5 +98,6 @@ public class Application {
 
     @SneakyThrows
     public static void main(String[] args) {
+        (new Application()).showWithNested();
     }
 }
